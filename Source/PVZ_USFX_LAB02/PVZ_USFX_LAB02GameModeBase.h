@@ -39,7 +39,7 @@ public:
 	void Spawn();
 
 	FVector contador;
-	const float Tolerance = 10.0f; // Puedes ajustar este valor según tus necesidades
+	 // Puedes ajustar este valor según tus necesidades
 
 
 	int contador2;
@@ -81,7 +81,10 @@ public:
 
 	FVector SpawnLocationPlantTemp;
 
+	/*FVector ZombieLocation;
+	FVector PlantaLocation;*/
 
 
+	float RangoAtaque;
 };
 

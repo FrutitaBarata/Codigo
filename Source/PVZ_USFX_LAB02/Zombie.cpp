@@ -39,8 +39,8 @@ AZombie::AZombie()
 	MeshZombie->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
 
 
-	energia = 200;
-	Velocidad = 0.2f;
+	energia = 2000;
+	Velocidad = 0.1f;
 
 	Tags.Add(TEXT("Zombie"));
 
@@ -104,6 +104,11 @@ void AZombie::Tick(float DeltaTime)
 
 }
 
+
+bool AZombie::IsActorDestroyed() const
+{
+  return IsPendingKill();
+}
 
 void AZombie::morir()
 {

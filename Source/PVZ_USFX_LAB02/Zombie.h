@@ -46,6 +46,9 @@ public:
 	int energia;
 
 
+	UFUNCTION(BlueprintCallable, Category = "Custom")
+	bool IsActorDestroyed() const;
+
 	FTimerHandle Temporizador;
 
 	void morir();

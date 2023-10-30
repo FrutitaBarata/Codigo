@@ -6,7 +6,7 @@
 AZombieComun::AZombieComun()
 {
 
-	energia = 30;
+	energia = 60;
 
 
 }

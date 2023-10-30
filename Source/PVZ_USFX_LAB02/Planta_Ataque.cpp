@@ -41,6 +41,8 @@ APlanta_Ataque::APlanta_Ataque()
 	contador = 1;
 
 
+	
+
 	//Ocultar el actor sin destruirlo
 	//SetActorHiddenInGame(true);
 
@@ -109,9 +111,11 @@ void APlanta_Ataque::FireShot(FVector FireDirection)
 	}
 }
 
+
+
 void APlanta_Ataque::ShotTimerExpired()
 {
-	bCanFire = true;
+	
 }
 
 void APlanta_Ataque::Destroyed()
@@ -153,3 +157,5 @@ void APlanta_Ataque::DefinirNotificarPlantas(ANotificarPlantas* myNotificarPlant
 	Notificador->Suscribirse(this);
 
 }
+
+
