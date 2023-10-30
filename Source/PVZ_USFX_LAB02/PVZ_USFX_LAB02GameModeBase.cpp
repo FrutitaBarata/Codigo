@@ -63,7 +63,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//Definiendo la posición de los zombies
 	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 	int a = 1;
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 5; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationZombie.X += 100;
 
@@ -83,7 +83,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	SpawnLocationPlantTemp = SpawnLocationPlant;
 
 	// Genera 5 plantas
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 5; i++)
 	{
 		SpawnLocationPlantTemp.X += 100;
 			
