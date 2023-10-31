@@ -47,6 +47,7 @@ void APublicador::NotificarSuscriptores()
 	{
 		//Cast each of them to a concrete Subscriber
 		ISuscriptor* Sub = Cast<ISuscriptor>(Actor);
+
 		if (Sub)
 		{
 			//Notify each of them that something has changed, so they can execute their own routine
@@ -54,6 +55,7 @@ void APublicador::NotificarSuscriptores()
 		}
 
 	}
+
 
 }
 

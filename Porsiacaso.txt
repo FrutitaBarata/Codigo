@@ -1,0 +1,19 @@
+			//for (int i = 0; i < Plantas2.Num(); i++) {
+
+			//	if (Plantas2[i]->GetActorLocation().X == Zombies[i]->GetActorLocation().X)
+			//	{
+			//		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Planta %s con Zombie %s"), *Plantas2[i]->GetName(), *Zombies[i]->GetName()));
+
+			//		//Notificador->DefinirEstado("Zombie a la vista");
+
+			//	}
+
+			//	else {
+			//		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("No")));
+
+
+			//	}
+
+			//}
+
+

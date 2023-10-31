@@ -28,6 +28,7 @@ private:
 	UPROPERTY()
 	TArray<AActor*> Suscriptores = TArray<AActor*>();
 
+
 public:
 	//Add the pased Subscriber to the list
 	virtual void Suscribirse(AActor* Suscriptor);

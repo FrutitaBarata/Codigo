@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 
 #include "PVZ_USFX_LAB02GameModeBase.h"
@@ -45,7 +45,7 @@ APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 
 	TiempoTranscurrido = 0.0f;
 
-	RangoAtaque = 200.0f;
+	RangoAtaque = 2000.0f;
 
 
 
@@ -59,48 +59,58 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 
 
-	//Definiendo la posición de los zombies
+	//Definiendo la posiciï¿½n de los zombies
 	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
-	int a = 1;
-	for (int i = 0; i < 5; i++) {
-		// Define una posición temporal para el zombie en X
-		SpawnLocationZombie.X += 100;
+
+	for (CantidadZombies = 0; CantidadZombies < 4; CantidadZombies++) {
+		// Define una posiciï¿½n temporal para el zombie en X
+		SpawnLocationZombie.X += 200;
 
 		NuevoZombie = GetWorld()->SpawnActor<AZombieComun>(AZombieComun::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
 
-		NuevoZombie->Velocidad = FMath::FRandRange(0.01f, 0.1f);
+		NuevoZombie->Velocidad = 0.1f;
 
+		NuevoZombie->energia = FMath::RandRange(100, 200);
 
 		Zombies.Add(NuevoZombie);
 
-		NuevoZombie->Columna_Zombie = i;
-		ZombiesVivos = true;
+		NuevoZombie->Columna_Zombie = CantidadZombies;
+
 	}
 
 
 
-	//Definiendo la posición de las plantas
+
+	//Definiendo la posiciï¿½n de las plantas
 	FVector SpawnLocationPlant = FVector(-920.0f, -600.0f, 22.0f);
 	SpawnLocationPlantTemp = SpawnLocationPlant;
 
 	// Genera 5 plantas
-	for (int i = 0; i < 5; i++)
+	for (CantidadPlantas = 0; CantidadPlantas < 4; CantidadPlantas++)
 	{
-		SpawnLocationPlantTemp.X += 100;
+		SpawnLocationPlantTemp.X += 200;
 
+
+
+		NombrePlanta = FString::Printf(TEXT("Planta %d"), CantidadPlantas + 1); // Cambio en la generaciÃ³n del nombre
+
+		// Genera una planta en la posicion temporal
 		NuevaPlantaGuisante = GetWorld()->SpawnActor<ALanza_Guisantes>(ALanza_Guisantes::StaticClass(), SpawnLocationPlantTemp, FRotator::ZeroRotator);
 
-		Plantas2.Add(NuevaPlantaGuisante);
+		PlantasQueAtacan.Add(NuevaPlantaGuisante);
 
+		// Agrega la planta al contenedor de plantas
+		Plantas.Add(NombrePlanta, NuevaPlantaGuisante);
 
 		NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
 
-		NuevaPlantaGuisante->Columna_Planta = i;
+		NuevaPlantaGuisante->Columna_Planta = CantidadPlantas;
+
+		//Mensaje con el nombre de la planta
+		GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Planta: %s"), *NombrePlanta));
+
 
 	}
-
-
-
 
 
 
@@ -113,49 +123,53 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	for (APlant* Planta : Plantas2) {
 
-		for (AZombie* Zombie : Zombies) {
+
+	for (AZombie* Zombie : Zombies) {
+
+		for (APlanta_Ataque* Planta : PlantasQueAtacan) {
+
 			FVector LocalizacionZombies = Zombie->GetActorLocation();
-			if (Zombie->Columna_Zombie == Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque && ZombiesVivos == true) {
+
+
+
+			if (Zombie->Columna_Zombie == Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
+
 				Notificador->DefinirEstado("Zombie a la vista");
-				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Hay zombis ")));
+				//Mostrando el estado de cada planta
+
+				//Plantas["Planta 1"]->Estado = Notificador->GetEstado();
+				//Plantas["Planta 2"]->Estado = Notificador->GetEstado();
+
+				PlantasQueAtacan[2]->Estado = Notificador->GetEstado();
+
+				PlantasQueAtacan[i]->Columna_Planta == Zombies[i]->Columna_Zombie;
+
+				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El estado de la %s es: %s"), *NombrePlanta, *Plantas[NombrePlanta]->Estado));
+
+
+				/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("la columna z es:%i, lac de p es: %i "), Zombie->Columna_Zombie, Planta->Columna_Planta));*/
+
 			}
 			else {
 				if (Zombies.Num() > 0) {
-
 					if (NuevoZombie->IsActorDestroyed()) {
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Cantidad Zombies: %i"), Zombies.Num()));
-
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("son: %i"), Zombies.Num()));
 						Zombies.Remove(Zombie);
-						ZombiesVivos = true;
-
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Cantidad Zombies: %i"), Zombies.Num()));
+						//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie fue removido: %i"), Zombies.Num()));
 
 					}
 				}
-				if (Zombies.Num() <= 0) {
-					GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, FString::Printf(TEXT("El codigo deberia terminar")));
+				else {
+					GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El codigo deberia terminar")));
 					Notificador->DefinirEstado("Zombie sin vista");
-					ZombiesVivos = false;
-				}
 
+				}
 			}
 		}
 	}
 
 
-	//if (Zombies.Num() > 0) {
-
-	//	if (NuevoZombie->IsActorDestroyed()) {
-	//		//Zombies.Remove(NuevoZombie);
-	//		ZombiesVivos = false;
-	//	}
-	//}
-	//if (Zombies.Num() <= 0) {
-	//	Notificador->DefinirEstado("Zombie sin vista");
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El codigo deberia terminar")));
-	//}
 
 
 
@@ -180,7 +194,6 @@ void APVZ_USFX_LAB02GameModeBase::aumentovelocidad()
 void APVZ_USFX_LAB02GameModeBase::MostrarEnergiaDePlantas()
 {
 }
-
 
 
 

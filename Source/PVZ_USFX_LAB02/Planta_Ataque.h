@@ -84,6 +84,6 @@ public:
 	void DefinirNotificarPlantas(ANotificarPlantas* myNotificarPlantas);
 
 
-
+	FString Estado;
 
 };

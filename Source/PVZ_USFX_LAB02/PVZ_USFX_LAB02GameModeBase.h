@@ -1,4 +1,4 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+ï»¿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
@@ -39,7 +39,7 @@ public:
 	void Spawn();
 
 	FVector contador;
-	// Puedes ajustar este valor según tus necesidades
+	// Puedes ajustar este valor segï¿½n tus necesidades
 
 
 	int contador2;
@@ -51,8 +51,13 @@ public:
 	// Declarar un vector de objetos
 	TArray<AZombie*> Zombies;
 
-	TArray<APlant*> Plantas2;
-	/*TMap<FString, APlant*> Plantas;*/
+	TArray<APlanta_Ataque*> PlantasQueAtacan;
+
+
+
+
+	TMap<FString, APlanta_Ataque*> Plantas;
+
 	float TiempoTranscurrido;
 
 	void aumentovelocidad();
@@ -87,8 +92,7 @@ public:
 
 	float RangoAtaque;
 
-	bool ZombiesVivos;
+	int CantidadPlantas;
 
-
+	int CantidadZombies;
 };
-
