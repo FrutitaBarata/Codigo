@@ -18,6 +18,7 @@ private:
 	//The current time of this Clock Tower
 	FString Estado;
 public:
+
 	//Called when the time of this Clock Tower has changed
 	void EstadoCambiado();
 	//Set the time of this Clock Tower

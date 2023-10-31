@@ -28,7 +28,7 @@ APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	
+
 
 	//Definiendo el Pawn o Peon
 	DefaultPawnClass = AJugador::StaticClass();
@@ -45,9 +45,9 @@ APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 
 	TiempoTranscurrido = 0.0f;
 
-	RangoAtaque=200.0f;
+	RangoAtaque = 200.0f;
 
-	
+
 
 }
 
@@ -56,27 +56,28 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	Super::BeginPlay();
 
 
-	 Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
+	Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 
 
 	//Definiendo la posición de los zombies
 	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 	int a = 1;
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 5; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationZombie.X += 100;
 
 		NuevoZombie = GetWorld()->SpawnActor<AZombieComun>(AZombieComun::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
 
 		NuevoZombie->Velocidad = FMath::FRandRange(0.01f, 0.1f);
-		
-		
-			Zombies.Add(NuevoZombie);
-			
-			NuevoZombie->Columna_Zombie = i ;
+
+
+		Zombies.Add(NuevoZombie);
+
+		NuevoZombie->Columna_Zombie = i;
+		ZombiesVivos = true;
 	}
-	
-	
+
+
 
 	//Definiendo la posición de las plantas
 	FVector SpawnLocationPlant = FVector(-920.0f, -600.0f, 22.0f);
@@ -86,23 +87,23 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	for (int i = 0; i < 5; i++)
 	{
 		SpawnLocationPlantTemp.X += 100;
-			
-			NuevaPlantaGuisante = GetWorld()->SpawnActor<ALanza_Guisantes>(ALanza_Guisantes::StaticClass(), SpawnLocationPlantTemp, FRotator::ZeroRotator);
 
-			Plantas2.Add(NuevaPlantaGuisante);
+		NuevaPlantaGuisante = GetWorld()->SpawnActor<ALanza_Guisantes>(ALanza_Guisantes::StaticClass(), SpawnLocationPlantTemp, FRotator::ZeroRotator);
 
-			
-			NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
-			
-			NuevaPlantaGuisante->Columna_Planta = i;
+		Plantas2.Add(NuevaPlantaGuisante);
+
+
+		NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
+
+		NuevaPlantaGuisante->Columna_Planta = i;
 
 	}
-	
 
-		
-	
-	
-	
+
+
+
+
+
 }
 
 
@@ -111,31 +112,52 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	
-	for (APlant * Planta : Plantas2) {
-		
+
+	for (APlant* Planta : Plantas2) {
+
 		for (AZombie* Zombie : Zombies) {
 			FVector LocalizacionZombies = Zombie->GetActorLocation();
-			if (Zombie->Columna_Zombie== Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
+			if (Zombie->Columna_Zombie == Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque && ZombiesVivos == true) {
 				Notificador->DefinirEstado("Zombie a la vista");
 				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Hay zombis ")));
 			}
 			else {
 				if (Zombies.Num() > 0) {
+
 					if (NuevoZombie->IsActorDestroyed()) {
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Cantidad Zombies: %i"), Zombies.Num()));
+
 						Zombies.Remove(Zombie);
-						
+						ZombiesVivos = true;
+
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Cantidad Zombies: %i"), Zombies.Num()));
+
 					}
 				}
-				else {
-					GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El codigo deberia terminar")));
+				if (Zombies.Num() <= 0) {
+					GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Blue, FString::Printf(TEXT("El codigo deberia terminar")));
 					Notificador->DefinirEstado("Zombie sin vista");
-	
+					ZombiesVivos = false;
 				}
 
 			}
 		}
 	}
+
+
+	//if (Zombies.Num() > 0) {
+
+	//	if (NuevoZombie->IsActorDestroyed()) {
+	//		//Zombies.Remove(NuevoZombie);
+	//		ZombiesVivos = false;
+	//	}
+	//}
+	//if (Zombies.Num() <= 0) {
+	//	Notificador->DefinirEstado("Zombie sin vista");
+	//	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El codigo deberia terminar")));
+	//}
+
+
 
 }
 
@@ -145,7 +167,7 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 
 void APVZ_USFX_LAB02GameModeBase::Spawn()
 {
-	
+
 
 }
 

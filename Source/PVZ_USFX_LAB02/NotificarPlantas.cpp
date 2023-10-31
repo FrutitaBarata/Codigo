@@ -15,4 +15,5 @@ void ANotificarPlantas::DefinirEstado(FString myEstado)
 	//Set the time using the passed parameter and warn that it's changed
 	Estado = myEstado;
 	EstadoCambiado();
+
 }

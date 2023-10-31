@@ -52,6 +52,8 @@ void APublicador::NotificarSuscriptores()
 			//Notify each of them that something has changed, so they can execute their own routine
 			Sub->NotificarZombieEnRango(this);
 		}
+
 	}
+
 }
 

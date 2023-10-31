@@ -51,7 +51,7 @@ protected:
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
 	float FireRate;
 
-	
+
 
 	void ShotTimerExpired();
 
@@ -73,10 +73,13 @@ private:
 	virtual void Destroyed() override;
 
 public:
+
 	//Called when the Plublisher changed its state, it will execute this Subscriber routine
 	virtual void NotificarZombieEnRango(class APublicador* Publicador) override;
+
 	//Execute this Subscriber routine
 	virtual void Cambios();
+
 	//Set the Clock Tower of this Subscriber
 	void DefinirNotificarPlantas(ANotificarPlantas* myNotificarPlantas);
 
