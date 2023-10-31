@@ -50,8 +50,7 @@ public:
 
 	// Declarar un vector de objetos
 	TArray<AZombie*> Zombies;
-
-	TArray<APlanta_Ataque*> PlantasQueAtacan;
+	TArray<APlanta_Ataque*> Plantas2;
 
 
 

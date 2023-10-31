@@ -75,7 +75,6 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 		Zombies.Add(NuevoZombie);
 
 		NuevoZombie->Columna_Zombie = CantidadZombies;
-
 	}
 
 
@@ -97,7 +96,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 		// Genera una planta en la posicion temporal
 		NuevaPlantaGuisante = GetWorld()->SpawnActor<ALanza_Guisantes>(ALanza_Guisantes::StaticClass(), SpawnLocationPlantTemp, FRotator::ZeroRotator);
 
-		PlantasQueAtacan.Add(NuevaPlantaGuisante);
+		Plantas2.Add(NuevaPlantaGuisante);
 
 		// Agrega la planta al contenedor de plantas
 		Plantas.Add(NombrePlanta, NuevaPlantaGuisante);
@@ -127,11 +126,9 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 
 	for (AZombie* Zombie : Zombies) {
 
-		for (APlanta_Ataque* Planta : PlantasQueAtacan) {
+		for (APlant* Planta : Plantas2) {
 
 			FVector LocalizacionZombies = Zombie->GetActorLocation();
-
-
 
 			if (Zombie->Columna_Zombie == Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
 
@@ -141,9 +138,10 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 				//Plantas["Planta 1"]->Estado = Notificador->GetEstado();
 				//Plantas["Planta 2"]->Estado = Notificador->GetEstado();
 
-				PlantasQueAtacan[2]->Estado = Notificador->GetEstado();
 
-				PlantasQueAtacan[i]->Columna_Planta == Zombies[i]->Columna_Zombie;
+				//Plantas2[1]->Columna_Planta = Zombies[1]->Columna_Zombie;
+
+				Plantas2[2]->Estado = Notificador->GetEstado();
 
 				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El estado de la %s es: %s"), *NombrePlanta, *Plantas[NombrePlanta]->Estado));
 
@@ -165,6 +163,7 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 					Notificador->DefinirEstado("Zombie sin vista");
 
 				}
+
 			}
 		}
 	}
@@ -194,6 +193,4 @@ void APVZ_USFX_LAB02GameModeBase::aumentovelocidad()
 void APVZ_USFX_LAB02GameModeBase::MostrarEnergiaDePlantas()
 {
 }
-
-
 
