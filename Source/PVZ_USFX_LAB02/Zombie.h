@@ -45,6 +45,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	int energia;
 
+	int Columna_Zombie;
 
 	UFUNCTION(BlueprintCallable, Category = "Custom")
 	bool IsActorDestroyed() const;

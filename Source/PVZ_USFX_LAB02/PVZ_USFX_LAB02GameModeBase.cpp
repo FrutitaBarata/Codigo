@@ -47,8 +47,7 @@ APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 
 	RangoAtaque=200.0f;
 
-	FilaActual = 1;
-	ColumnaActual = 1;
+	
 
 }
 
@@ -63,7 +62,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//Definiendo la posición de los zombies
 	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 	int a = 1;
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 3; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationZombie.X += 100;
 
@@ -73,7 +72,8 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 		
 		
 			Zombies.Add(NuevoZombie);
-
+			
+			NuevoZombie->Columna_Zombie = i ;
 	}
 	
 	
@@ -93,8 +93,8 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 
 			
 			NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
-
-		
+			
+			NuevaPlantaGuisante->Columna_Planta = i;
 
 	}
 	
@@ -112,11 +112,11 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	for (AZombie* Zombie : Zombies) {
-		FVector LocalizacionZombies = Zombie->GetActorLocation();
-		for (APlant* Planta : Plantas2) {
-			FVector LocalizacionPlantas = Planta->GetActorLocation();
-			if (FMath::IsNearlyEqual(LocalizacionZombies.X, LocalizacionPlantas.X, SMALL_NUMBER) && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
+	for (APlant * Planta : Plantas2) {
+		
+		for (AZombie* Zombie : Zombies) {
+			FVector LocalizacionZombies = Zombie->GetActorLocation();
+			if (Zombie->Columna_Zombie== Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
 				Notificador->DefinirEstado("Zombie a la vista");
 				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Hay zombis ")));
 			}
@@ -130,7 +130,7 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 				else {
 					GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El codigo deberia terminar")));
 					Notificador->DefinirEstado("Zombie sin vista");
-					LocalizacionZombies = FVector::ZeroVector;
+	
 				}
 
 			}
