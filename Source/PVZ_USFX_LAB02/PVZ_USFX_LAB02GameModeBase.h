@@ -16,6 +16,7 @@ class APlanta_Ataque;
 class ALanza_Guisantes;
 class ANotificarPlantas;
 class AZombieCubo;
+class AZombie_Tank;
 UCLASS()
 class PVZ_USFX_LAB02_API APVZ_USFX_LAB02GameModeBase : public AGameModeBase
 {
@@ -50,6 +51,7 @@ public:
 
 	// Declarar un vector de objetos
 	TArray<AZombie*> Zombies;
+	TArray<AZombie*> Zombies_Decorados;
 	TArray<APlant*> Plantas2;
 	/*TMap<FString, APlant*> Plantas;*/
 	float TiempoTranscurrido;
@@ -61,6 +63,7 @@ public:
 
 	AZombieComun* NuevoZombie;
 
+	AZombie_Tank* NuevoZombie_Decorado;
 
 	FTimerHandle Temporizador2;
 
@@ -72,10 +75,9 @@ public:
 
 	int FilaActual;
 	int ColumnaActual;
-
 	void prueba();
 
-	ANotificarPlantas* Notificador;
+	
 
 	AZombieCubo* NewZombieCubo;
 
@@ -83,8 +85,10 @@ public:
 
 	/*FVector ZombieLocation;
 	FVector PlantaLocation;*/
-
-
+	//-------------------------------------------------------------------------------------------------------------
+	
+	
+	ANotificarPlantas* Notificador;
 	float RangoAtaque;
 };
 

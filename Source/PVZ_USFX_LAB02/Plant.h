@@ -21,7 +21,7 @@ public:
 	// Sets default values for this actor's properties
 	APlant();
 
-	int Columna_Planta;
+	
 
 protected:
 	// Called when the game starts or when spawned
@@ -47,4 +47,7 @@ public:
 		FVector NormalImpulse, const FHitResult& Hit)override;//esta funcion nos notifica cada golpe que de la clase.
 
 
+
+	//-------------------------------
+	int Columna_Planta;
 };

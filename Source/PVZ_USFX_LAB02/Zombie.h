@@ -32,8 +32,8 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* MeshZombie;
-
-
+	UPROPERTY(EditAnywhere)
+	UStaticMeshComponent* MeshZombie_Tank;
 
 public:
 	// Called every frame
@@ -45,7 +45,7 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	int energia;
 
-	int Columna_Zombie;
+	
 
 	UFUNCTION(BlueprintCallable, Category = "Custom")
 	bool IsActorDestroyed() const;
@@ -64,4 +64,9 @@ public:
 
 
 
+	
+
+
+	//------------------------------------------------
+	int Columna_Zombie;
 };

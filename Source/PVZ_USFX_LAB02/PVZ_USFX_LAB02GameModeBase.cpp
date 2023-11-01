@@ -19,9 +19,9 @@
 #include "Lanza_Guisantes.h"
 
 #include "ZombieComun.h"
-
+#include "Zombie_Tank.h"
 #include "NotificarPlantas.h"
-
+#include "AZombieMallaCambiable.h"
 
 
 APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
@@ -45,37 +45,55 @@ APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 
 	TiempoTranscurrido = 0.0f;
 
-	RangoAtaque=300.0f;
-
 	
+	//-------------------------------------------------------------------------------
+	RangoAtaque = 300.0f;
 
 }
 
 void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
-
+	//-------------------------------------------------------------------------------
 
 	 Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 
 
 	//Definiendo la posición de los zombies
 	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
-	int a = 1;
+	//for (int i = 0; i < 5; i++) {
+	//	// Define una posición temporal para el zombie en X
+	//	SpawnLocationZombie.X += 100;
+
+	//	NuevoZombie = GetWorld()->SpawnActor<AZombieComun>(AZombieComun::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
+
+	//	NuevoZombie->Velocidad = 0.1f;
+	//	
+	//	
+	//		Zombies.Add(NuevoZombie);
+	//		//-------------------------------------------------------------------------------
+	//		NuevoZombie->Columna_Zombie = i ;
+	//}
+	
+
 	for (int i = 0; i < 5; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationZombie.X += 100;
 
-		NuevoZombie = GetWorld()->SpawnActor<AZombieComun>(AZombieComun::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
+		NuevoZombie_Decorado = GetWorld()->SpawnActor<AZombie_Tank>(AZombie_Tank::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
 
-		NuevoZombie->Velocidad = 0.1f;
-		
-		
-			Zombies.Add(NuevoZombie);
-			
-			NuevoZombie->Columna_Zombie = i ;
+		NuevoZombie_Decorado->Velocidad = 0.1f;
+
+
+		Zombies_Decorados.Add(NuevoZombie_Decorado);
+		//-------------------------------------------------------------------------------
+		NuevoZombie_Decorado->Columna_Zombie = i;
+
+		AZombie* ZombieBase = NuevoZombie_Decorado;
+
+		AZombie* ZombieDecorado = AAZombieMallaCambiable::AAZombieMallaCambiable(ZombieBase);
+
 	}
-	
 	
 
 	//Definiendo la posición de las plantas
@@ -91,11 +109,10 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 
 			Plantas2.Add(NuevaPlantaGuisante);
 
-			
-			NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
-			
-			NuevaPlantaGuisante->Columna_Planta = i;
 
+			//-------------------------------------------------------------------------------
+			NuevaPlantaGuisante->DefinirNotificarPlantas(Notificador);
+			NuevaPlantaGuisante->Columna_Planta = i;
 	}
 	
 
@@ -112,21 +129,22 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	for (AZombie * Zombie : Zombies) {
+	for (AZombie * Zombie : Zombies_Decorados) {
 		
 		for (APlant* Planta : Plantas2) {
-			FVector LocalizacionZombies = Zombie->GetActorLocation();
-			if (Zombie->Columna_Zombie==Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
+			/*FVector LocalizacionZombies = Zombie->GetActorLocation();*/
+			if (Zombie->Columna_Zombie==Planta->Columna_Planta /*&& FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque*/) {
 
 				Notificador->DefinirEstado("Zombie a la vista");
 				/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("la columna z es:%i, lac de p es: %i "), Zombie->Columna_Zombie, Planta->Columna_Planta));*/
+				Zombie->CambiarTamanoCuandoVidaAMitad();
 			}
 			else {
-				if (Zombies.Num() > 0) {
-					if (NuevoZombie->IsActorDestroyed()) {
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("son: %i"), Zombies.Num()));
-						Zombies.Remove(Zombie);
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie fue removido: %i"),Zombies.Num() ));
+				if (Zombies_Decorados.Num() > 0) {
+					if (NuevoZombie_Decorado->IsActorDestroyed()) {
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("son: %i"), Zombies_Decorados.Num()));
+						Zombies_Decorados.Remove(Zombie);
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie fue removido: %i"), Zombies_Decorados.Num() ));
 						
 					}
 				}

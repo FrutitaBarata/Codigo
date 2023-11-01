@@ -14,29 +14,29 @@ AZombie::AZombie()
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	MeshZombie = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Zombie Mesh"));
+	//MeshZombie = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Zombie Mesh"));
 
-	MeshZombie->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+	//MeshZombie->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 
-	//MeshZombie->SetSimulatePhysics(true);
-	MeshZombie->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
+	////MeshZombie->SetSimulatePhysics(true);
+	//MeshZombie->SetCollisionObjectType(ECollisionChannel::ECC_Pawn);
 
-	MeshZombie->SetCollisionProfileName(UCollisionProfile::BlockAllDynamic_ProfileName);
-	MeshZombie->SetupAttachment(RootComponent);
+	//MeshZombie->SetCollisionProfileName(UCollisionProfile::BlockAllDynamic_ProfileName);
+	//MeshZombie->SetupAttachment(RootComponent);
 
-	RootComponent = MeshZombie;
+	//RootComponent = MeshZombie;
 
-	static ConstructorHelpers::FObjectFinder<UStaticMesh> ZombieMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_QuadPyramid.Shape_QuadPyramid'"));
-
-
-	//Mesh o aspecto alternativo
-	//static ConstructorHelpers::FObjectFinder<UStaticMesh> ZombieMeshAsset2(TEXT("StaticMesh'/Game/StarterContent/Architecture/Pillar_50x500.Pillar_50x500'"));
+	//ConstructorHelpers::FObjectFinder<UStaticMesh> ZombieMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_QuadPyramid.Shape_QuadPyramid'"));
 
 
-	//Definición del mesh
-	MeshZombie->SetStaticMesh(ZombieMeshAsset.Object);
+	////Mesh o aspecto alternativo
+	////static ConstructorHelpers::FObjectFinder<UStaticMesh> ZombieMeshAsset2(TEXT("StaticMesh'/Game/StarterContent/Architecture/Pillar_50x500.Pillar_50x500'"));
 
-	MeshZombie->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
+
+	////Definición del mesh
+	//MeshZombie->SetStaticMesh(ZombieMeshAsset.Object);
+
+	//MeshZombie->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
 
 
 	energia = 2000;
