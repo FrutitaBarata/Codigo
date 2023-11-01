@@ -5,8 +5,8 @@
 
 
 
-AAZombieMallaCambiable::AAZombieMallaCambiable(AZombie* ZombieBase)
-    : ZombieDecorado(ZombieBase)
+AAZombieMallaCambiable::AAZombieMallaCambiable()
+    
 {
     
 }

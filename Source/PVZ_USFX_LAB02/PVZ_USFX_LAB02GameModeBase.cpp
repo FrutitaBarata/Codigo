@@ -89,9 +89,8 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 		//-------------------------------------------------------------------------------
 		NuevoZombie_Decorado->Columna_Zombie = i;
 
-		AZombie* ZombieBase = NuevoZombie_Decorado;
+		
 
-		AZombie* ZombieDecorado = AAZombieMallaCambiable::AAZombieMallaCambiable(ZombieBase);
 
 	}
 	
@@ -137,7 +136,7 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 
 				Notificador->DefinirEstado("Zombie a la vista");
 				/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("la columna z es:%i, lac de p es: %i "), Zombie->Columna_Zombie, Planta->Columna_Planta));*/
-				Zombie->CambiarTamanoCuandoVidaAMitad();
+				
 			}
 			else {
 				if (Zombies_Decorados.Num() > 0) {
