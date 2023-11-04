@@ -5,10 +5,8 @@
 
 
 
-AAZombieMallaCambiable::AAZombieMallaCambiable()
-    
+AAZombieMallaCambiable::AAZombieMallaCambiable(AZombi* Zombie_A_Recibir)
 {
-    
 }
 
 void AAZombieMallaCambiable::CambiarTamanoCuandoVidaAMitad()

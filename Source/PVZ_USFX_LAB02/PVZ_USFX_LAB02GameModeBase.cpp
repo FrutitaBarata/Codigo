@@ -17,7 +17,7 @@
 
 #include "Planta_Ataque.h"
 #include "Lanza_Guisantes.h"
-
+#include "Power_Ups.h"
 #include "ZombieComun.h"
 #include "Zombie_Tank.h"
 #include "NotificarPlantas.h"
@@ -60,7 +60,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 
 
 	//Definiendo la posición de los zombies
-	FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
+	
 	//for (int i = 0; i < 5; i++) {
 	//	// Define una posición temporal para el zombie en X
 	//	SpawnLocationZombie.X += 100;
@@ -74,7 +74,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//		//-------------------------------------------------------------------------------
 	//		NuevoZombie->Columna_Zombie = i ;
 	//}
-	
+	 FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 
 	for (int i = 0; i < 5; i++) {
 		// Define una posición temporal para el zombie en X
@@ -89,13 +89,25 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 		//-------------------------------------------------------------------------------
 		NuevoZombie_Decorado->Columna_Zombie = i;
 
+	}
+	
+	FVector SpawnLocationPower_Up = FVector(-920.0f, 300.0f, 22.0f);
+	
+	for (int i = 0; i < 5; i++) {
+		// Define una posición temporal para el zombie en X
+		SpawnLocationPower_Up.X += 100;
+
+		Nuevo_Power_Up = GetWorld()->SpawnActor<APower_Ups>(APower_Ups::StaticClass(), SpawnLocationPower_Up, FRotator::ZeroRotator);
+
 		
 
 
-	}
-	
+		Mis_Power_Ups.Add(Nuevo_Power_Up);
+		
 
-	//Definiendo la posición de las plantas
+	}
+
+
 	FVector SpawnLocationPlant = FVector(-920.0f, -600.0f, 22.0f);
 	SpawnLocationPlantTemp = SpawnLocationPlant;
 
@@ -129,10 +141,22 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	
 	for (AZombie * Zombie : Zombies_Decorados) {
+		FVector LocalizacionZombies = Zombie->GetActorLocation();
 		
+		
+		for (APower_Ups* Power_Up : Mis_Power_Ups) {
+			FVector loc_Power_Up = Nuevo_Power_Up->GetActorLocation();
+			if (loc_Power_Up ==  LocalizacionZombies ) {
+				AZombie* Zombi_A_Decorar = Zombie;
+				AAZombieMallaCambiable* ZombieDecorado = NewObject<AAZombieMallaCambiable>(GetTransientPackage(), FName(TEXT("Zombie a decorar")), EObjectFlags::RF_NoFlags, nullptr, Zombi_A_Decorar);
+				ZombieDecorado->CambiarTamanoCuandoVidaAMitad();
+
+			}
+		}
+
 		for (APlant* Planta : Plantas2) {
-			/*FVector LocalizacionZombies = Zombie->GetActorLocation();*/
-			if (Zombie->Columna_Zombie==Planta->Columna_Planta /*&& FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque*/) {
+			
+			if (Zombie->Columna_Zombie==Planta->Columna_Planta && FMath::Abs(LocalizacionZombies.Y) <= RangoAtaque) {
 
 				Notificador->DefinirEstado("Zombie a la vista");
 				/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("la columna z es:%i, lac de p es: %i "), Zombie->Columna_Zombie, Planta->Columna_Planta));*/
@@ -141,9 +165,9 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 			else {
 				if (Zombies_Decorados.Num() > 0) {
 					if (NuevoZombie_Decorado->IsActorDestroyed()) {
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("son: %i"), Zombies_Decorados.Num()));
+						/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("son: %i"), Zombies_Decorados.Num()));*/
 						Zombies_Decorados.Remove(Zombie);
-						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie fue removido: %i"), Zombies_Decorados.Num() ));
+						/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie fue removido: %i"), Zombies_Decorados.Num() ));*/
 						
 					}
 				}

@@ -14,10 +14,10 @@ class PVZ_USFX_LAB02_API AAZombieMallaCambiable : public AZombie
 	GENERATED_BODY()
 
 
-
+	class AZombi;
 
 public:
-	AAZombieMallaCambiable();
+	AAZombieMallaCambiable(AZombi* Zombie_A_Recibir);
 
 
 	void CambiarTamanoCuandoVidaAMitad();

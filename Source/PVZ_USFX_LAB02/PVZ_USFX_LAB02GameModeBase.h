@@ -9,6 +9,7 @@
 /**
  *
  */
+class APower_Ups;
 class AZombie;
 class AZombieComun;
 class APlant;
@@ -53,6 +54,8 @@ public:
 	TArray<AZombie*> Zombies;
 	TArray<AZombie*> Zombies_Decorados;
 	TArray<APlant*> Plantas2;
+	TArray<APower_Ups*> Mis_Power_Ups;
+
 	/*TMap<FString, APlant*> Plantas;*/
 	float TiempoTranscurrido;
 
@@ -60,6 +63,7 @@ public:
 
 	void MostrarEnergiaDePlantas();
 
+	APower_Ups* Nuevo_Power_Up;
 
 	AZombieComun* NuevoZombie;
 
