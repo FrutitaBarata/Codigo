@@ -6,13 +6,13 @@
 #include "GameFramework/Actor.h"
 
 #include "Components/BoxComponent.h"
-
+#include "Zombie_Interface.h"
 #include "Suscriptor.h"
 
 #include "Zombie.generated.h"
 
 UCLASS()
-class PVZ_USFX_LAB02_API AZombie : public AActor
+class PVZ_USFX_LAB02_API AZombie : public AActor, public IZombie_Interface
 {
 	GENERATED_BODY()
 
