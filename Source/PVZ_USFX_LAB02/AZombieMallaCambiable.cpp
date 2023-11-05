@@ -5,7 +5,7 @@
 
 
 
-AAZombieMallaCambiable::AAZombieMallaCambiable(AZombi* Zombie_A_Recibir)
+AAZombieMallaCambiable::AAZombieMallaCambiable(/*AZombi* Zombie_A_Recibir*/)
 {
 }
 

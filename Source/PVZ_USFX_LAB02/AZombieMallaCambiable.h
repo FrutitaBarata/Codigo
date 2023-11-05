@@ -17,7 +17,7 @@ class PVZ_USFX_LAB02_API AAZombieMallaCambiable : public AZombie
 	class AZombi;
 
 public:
-	AAZombieMallaCambiable(AZombi* Zombie_A_Recibir);
+	AAZombieMallaCambiable(/*AZombi* Zombie_A_Recibir*/);
 
 
 	void CambiarTamanoCuandoVidaAMitad();

@@ -147,9 +147,9 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 		for (APower_Ups* Power_Up : Mis_Power_Ups) {
 			FVector loc_Power_Up = Nuevo_Power_Up->GetActorLocation();
 			if (loc_Power_Up ==  LocalizacionZombies ) {
-				AZombie* Zombi_A_Decorar = Zombie;
-				AAZombieMallaCambiable* ZombieDecorado = NewObject<AAZombieMallaCambiable>(GetTransientPackage(), FName(TEXT("Zombie a decorar")), EObjectFlags::RF_NoFlags, nullptr, Zombi_A_Decorar);
-				ZombieDecorado->CambiarTamanoCuandoVidaAMitad();
+				/*AZombie* Zombi_A_Decorar = Zombie;*/
+				/*AAZombieMallaCambiable* ZombieDecorado = NewObject<AAZombieMallaCambiable>(GetTransientPackage(), FName(TEXT("Zombie a decorar")), EObjectFlags::RF_NoFlags, nullptr, NuevoZombie_Decorado);*/
+				/*ZombieDecorado->CambiarTamanoCuandoVidaAMitad();*/
 
 			}
 		}
