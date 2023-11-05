@@ -14,7 +14,6 @@ class PVZ_USFX_LAB02_API AAZombieMallaCambiable : public AZombie
 	GENERATED_BODY()
 
 
-	class AZombi;
 
 public:
 	AAZombieMallaCambiable(/*AZombi* Zombie_A_Recibir*/);
@@ -22,5 +21,5 @@ public:
 
 	void CambiarTamanoCuandoVidaAMitad();
 private:
-	AZombie* ZombieDecorado;
+	
 };

@@ -34,5 +34,5 @@ AZombie_Tank::AZombie_Tank()
 	//Definición del mesh
 	MeshZombie_Tank->SetStaticMesh(ZombieMeshAsset.Object);
 
-	MeshZombie_Tank->SetRelativeScale3D(FVector(2.f, 2.f, 2.f));
+	MeshZombie_Tank->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
 }

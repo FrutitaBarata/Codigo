@@ -12,10 +12,13 @@
 class APower_Ups;
 class AZombie;
 class AZombieComun;
+class IZombie_Interface;
 class APlant;
 class APlanta_Ataque;
 class ALanza_Guisantes;
 class ANotificarPlantas;
+class Decorador_Zombie;
+class Decorador_V;
 class AZombieCubo;
 class AZombie_Tank;
 UCLASS()
@@ -62,20 +65,24 @@ public:
 	void aumentovelocidad();
 
 	void MostrarEnergiaDePlantas();
+	
 
-	APower_Ups* Nuevo_Power_Up;
 
-	AZombieComun* NuevoZombie;
-
-	AZombie_Tank* NuevoZombie_Decorado;
+	AZombie* NuevoZombie;
+	
+	
 
 	FTimerHandle Temporizador2;
 
 	FString NombrePlanta;
 
 	ALanza_Guisantes* NuevaPlantaGuisante;
-
-
+	//.--------------------------------------
+	IZombie_Interface* Zombie_Interface;
+	AZombie_Tank* NuevoZombie_Decorado;
+	APower_Ups* Nuevo_Power_Up;
+	ADecorador_V* Decorador_V;
+	const float MaxDistance = 10.0f;
 
 	int FilaActual;
 	int ColumnaActual;

@@ -13,8 +13,9 @@
 #include "Jugador.h"
 #include "Controlador.h"
 #include "HUDPlantas.h"
+#include "Decorador_Zombie.h"
 
-
+#include "Decorador_V.h"
 #include "Planta_Ataque.h"
 #include "Lanza_Guisantes.h"
 #include "Power_Ups.h"
@@ -60,19 +61,19 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 
 
 	//Definiendo la posición de los zombies
-	
+	// FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 	//for (int i = 0; i < 5; i++) {
 	//	// Define una posición temporal para el zombie en X
 	//	SpawnLocationZombie.X += 100;
 
-	//	NuevoZombie = GetWorld()->SpawnActor<AZombieComun>(AZombieComun::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
+	//	NuevoZombie_Decorado = GetWorld()->SpawnActor<AZombie>(AZombie::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
 
-	//	NuevoZombie->Velocidad = 0.1f;
+	//	NuevoZombie_Decorado->Velocidad = 0.1f;
 	//	
 	//	
-	//		Zombies.Add(NuevoZombie);
+	//		Zombies.Add(NuevoZombie_Decorado);
 	//		//-------------------------------------------------------------------------------
-	//		NuevoZombie->Columna_Zombie = i ;
+	//		NuevoZombie_Decorado->Columna_Zombie = i ;
 	//}
 	 FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 
@@ -142,14 +143,15 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 	
 	for (AZombie * Zombie : Zombies_Decorados) {
 		FVector LocalizacionZombies = Zombie->GetActorLocation();
-		
-		
+
 		for (APower_Ups* Power_Up : Mis_Power_Ups) {
+
 			FVector loc_Power_Up = Nuevo_Power_Up->GetActorLocation();
-			if (loc_Power_Up ==  LocalizacionZombies ) {
-				/*AZombie* Zombi_A_Decorar = Zombie;*/
-				/*AAZombieMallaCambiable* ZombieDecorado = NewObject<AAZombieMallaCambiable>(GetTransientPackage(), FName(TEXT("Zombie a decorar")), EObjectFlags::RF_NoFlags, nullptr, NuevoZombie_Decorado);*/
-				/*ZombieDecorado->CambiarTamanoCuandoVidaAMitad();*/
+
+			if (FVector::DistSquared(loc_Power_Up, LocalizacionZombies) < (MaxDistance * MaxDistance)) {
+				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
+				Decorador_V->Definir_Zombi(Zombie);
+				Decorador_V->Decorar_con_V();
 
 			}
 		}

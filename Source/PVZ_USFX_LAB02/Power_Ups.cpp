@@ -15,7 +15,7 @@ APower_Ups::APower_Ups()
 
 	MeshPower_Up->SetStaticMesh(MeshPower_UpAsset.Object);
 
-	MeshPower_Up->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
+	MeshPower_Up->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 
 
 }
