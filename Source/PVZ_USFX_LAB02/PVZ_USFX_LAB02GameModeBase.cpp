@@ -134,7 +134,9 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	
 }
 
-
+//GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
+//Decorador_V->Definir_Zombi(Zombie);
+///*Decorador_V->Decorar_con_V();*/
 
 
 void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
@@ -149,9 +151,13 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 			FVector loc_Power_Up = Nuevo_Power_Up->GetActorLocation();
 
 			if (FVector::DistSquared(loc_Power_Up, LocalizacionZombies) < (MaxDistance * MaxDistance)) {
-				GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
-				Decorador_V->Definir_Zombi(Zombie);
-				Decorador_V->Decorar_con_V();
+				if (!(Power_Up->IsActorDestroyed())) {
+					Power_Up->Destroy();
+					if (Power_Up->IsActorDestroyed()) {
+						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
+						Decorador_V->Definir_Zombi(Zombie);
+					}
+				}
 
 			}
 		}

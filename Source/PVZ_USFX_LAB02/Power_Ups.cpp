@@ -20,6 +20,8 @@ APower_Ups::APower_Ups()
 
 }
 
+
+
 // Called when the game starts or when spawned
 void APower_Ups::BeginPlay()
 {
@@ -34,3 +36,7 @@ void APower_Ups::Tick(float DeltaTime)
 
 }
 
+bool APower_Ups::IsActorDestroyed() const
+{
+	return IsPendingKill();
+}

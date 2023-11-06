@@ -82,7 +82,7 @@ public:
 	AZombie_Tank* NuevoZombie_Decorado;
 	APower_Ups* Nuevo_Power_Up;
 	ADecorador_V* Decorador_V;
-	const float MaxDistance = 10.0f;
+	const float MaxDistance = 0.5f;
 
 	int FilaActual;
 	int ColumnaActual;
