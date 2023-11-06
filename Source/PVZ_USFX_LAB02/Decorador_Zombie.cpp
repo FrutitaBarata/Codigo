@@ -25,15 +25,6 @@ void ADecorador_Zombie::Tick(float DeltaTime)
 
 }
 
-void ADecorador_Zombie::Definir_Zombi(IZombie_Interface* _Zombie_Interface)
-{
-	 Zombie_Interface = _Zombie_Interface; 
-	 GetEnemigo();
-}
 
-IZombie_Interface* ADecorador_Zombie::GetEnemigo()
-{
-	return Zombie_Interface;
-}
 
 

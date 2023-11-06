@@ -58,7 +58,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//-------------------------------------------------------------------------------
 
 	 Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
-
+	 Decorador_V = GetWorld()->SpawnActor<ADecorador_V>(ADecorador_V::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 
 	//Definiendo la posición de los zombies
 	// FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
@@ -155,7 +155,8 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 					Power_Up->Destroy();
 					if (Power_Up->IsActorDestroyed()) {
 						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
-						Decorador_V->Definir_Zombi(Zombie);
+						/*Decorador_V->Definir_Zombi(Zombie);
+						Decorador_V->Decorar_con_V();*/
 					}
 				}
 
