@@ -27,6 +27,7 @@ private:
 
 
 public:
-	void Definir_Zombi(IZombie_Interface* _Zombie_Interface) { Zombie_Interface = _Zombie_Interface; }
-	IZombie_Interface* GetEnemigo() { return Zombie_Interface; }
+	void Definir_Zombi(IZombie_Interface* _Zombie_Interface);
+	IZombie_Interface* GetEnemigo();
 };
+
