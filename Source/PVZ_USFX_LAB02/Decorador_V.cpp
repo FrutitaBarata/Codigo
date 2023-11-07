@@ -16,7 +16,7 @@ ADecorador_V::ADecorador_V()
 void ADecorador_V::Decorar_con_V(AZombie_con_V* ZZ)
 {
 	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("halo? :%i "), ZZ->energia));
-	ZZ->energia = 10;
+	ZZ->energia = 100;
 	/*GetEnergia();*/
 	
 	
