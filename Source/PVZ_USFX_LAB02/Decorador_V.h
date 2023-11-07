@@ -14,5 +14,9 @@ class PVZ_USFX_LAB02_API ADecorador_V : public ADecorador_Zombie
 {
 	GENERATED_BODY()
 public:
-	void Decorar_con_V();
+	ADecorador_V();
+	void Decorar_con_V(class AZombie_con_V* ZZ);
+	int Energia;
+	int GetEnergia() { return Energia; };
+	ADecorador_V* Decorador_V;
 };

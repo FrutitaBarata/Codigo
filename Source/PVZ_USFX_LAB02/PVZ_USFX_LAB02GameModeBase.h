@@ -17,6 +17,7 @@ class APlant;
 class APlanta_Ataque;
 class ALanza_Guisantes;
 class ANotificarPlantas;
+class AZombie_con_V;
 class Decorador_Zombie;
 class Decorador_V;
 class AZombieCubo;
@@ -55,7 +56,7 @@ public:
 
 	// Declarar un vector de objetos
 	TArray<AZombie*> Zombies;
-	TArray<AZombie*> Zombies_Decorados;
+	TArray<AZombie_con_V*> Zombies_Decorados;
 	TArray<APlant*> Plantas2;
 	TArray<APower_Ups*> Mis_Power_Ups;
 
@@ -79,10 +80,10 @@ public:
 	ALanza_Guisantes* NuevaPlantaGuisante;
 	//.--------------------------------------
 	IZombie_Interface* Zombie_Interface;
-	AZombie_Tank* NuevoZombie_Decorado;
+	AZombie_con_V* NuevoZombie_Decorado;
 	APower_Ups* Nuevo_Power_Up;
 	ADecorador_V* Decorador_V;
-	const float MaxDistance = 0.5f;
+	const float MaxDistance = 0.7f;
 
 	int FilaActual;
 	int ColumnaActual;

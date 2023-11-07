@@ -21,6 +21,8 @@
 #include "Power_Ups.h"
 #include "ZombieComun.h"
 #include "Zombie_Tank.h"
+#include "Zombie_con_V.h"
+#include "Zombie_Interface.h"
 #include "NotificarPlantas.h"
 #include "AZombieMallaCambiable.h"
 
@@ -77,11 +79,11 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//}
 	 FVector SpawnLocationZombie = FVector(-920.0f, 600.0f, 22.0f);
 
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 1; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationZombie.X += 100;
 
-		NuevoZombie_Decorado = GetWorld()->SpawnActor<AZombie_Tank>(AZombie_Tank::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
+		NuevoZombie_Decorado = GetWorld()->SpawnActor<AZombie_con_V>(AZombie_con_V::StaticClass(), SpawnLocationZombie, FRotator::ZeroRotator);
 
 		NuevoZombie_Decorado->Velocidad = 0.1f;
 
@@ -94,7 +96,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	
 	FVector SpawnLocationPower_Up = FVector(-920.0f, 300.0f, 22.0f);
 	
-	for (int i = 0; i < 5; i++) {
+	for (int i = 0; i < 1; i++) {
 		// Define una posición temporal para el zombie en X
 		SpawnLocationPower_Up.X += 100;
 
@@ -113,7 +115,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	SpawnLocationPlantTemp = SpawnLocationPlant;
 
 	// Genera 5 plantas
-	for (int i = 0; i < 5; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		SpawnLocationPlantTemp.X += 100;
 			
@@ -143,7 +145,7 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	for (AZombie * Zombie : Zombies_Decorados) {
+	for (AZombie_con_V* Zombie : Zombies_Decorados) {
 		FVector LocalizacionZombies = Zombie->GetActorLocation();
 
 		for (APower_Ups* Power_Up : Mis_Power_Ups) {
@@ -155,8 +157,9 @@ void APVZ_USFX_LAB02GameModeBase::Tick(float DeltaTime)
 					Power_Up->Destroy();
 					if (Power_Up->IsActorDestroyed()) {
 						GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Detecta")));
-						/*Decorador_V->Definir_Zombi(Zombie);
-						Decorador_V->Decorar_con_V();*/
+						
+						/*Decorador_V->Definir_Zombi(Zombie);*/
+						Decorador_V->Decorar_con_V(Zombie);
 					}
 				}
 

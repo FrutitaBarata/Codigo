@@ -47,6 +47,6 @@ public:
 	FORCEINLINE UStaticMeshComponent* GetProjectileMesh() const { return MeshBala; }
 
 
-	class AZombie* Zombie;
-
+	class AZombie* Zombie1;
+	class AZombie_con_V* Zombie;
 };

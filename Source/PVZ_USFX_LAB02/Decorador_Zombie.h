@@ -24,11 +24,12 @@ public:
 	virtual void Tick(float DeltaTime) override;
 private: 
 	IZombie_Interface* Zombie_Interface;
-
+	ADecorador_Zombie* Decorador_Zombie;
 
 public:
-	
+	class ADecorador_V* Decorador_V;
 	void Definir_Zombi(IZombie_Interface* _Zombie_Interface) { Zombie_Interface = _Zombie_Interface; }
 	IZombie_Interface* GetZombi() { return Zombie_Interface; }
+	int Valor_Nuevo;
 };
 
