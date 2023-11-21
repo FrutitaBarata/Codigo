@@ -41,7 +41,7 @@ APlanta_Ataque::APlanta_Ataque()
 	contador = 1;
 
 
-	
+
 
 	//Ocultar el actor sin destruirlo
 	//SetActorHiddenInGame(true);
@@ -115,14 +115,14 @@ void APlanta_Ataque::FireShot(FVector FireDirection)
 
 void APlanta_Ataque::ShotTimerExpired()
 {
-	
+
 }
 
 void APlanta_Ataque::Destroyed()
 {
-	
+
 	Notificador->Desuscribirse(this);
-	
+
 }
 
 void APlanta_Ataque::NotificarZombieEnRango(APublicador* Publicador)
@@ -145,7 +145,7 @@ void APlanta_Ataque::Cambios()
 		//Execute the Midday routine
 		/*GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("El zombie no esta a la vista")));*/
 		bCanFire = false;
-		
+
 	}
 
 }

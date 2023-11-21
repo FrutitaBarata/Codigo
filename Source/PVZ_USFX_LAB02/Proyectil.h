@@ -30,23 +30,23 @@ public:
 
 
 	UPROPERTY(EditAnywhere)
-	UStaticMeshComponent* MeshBala;
+		UStaticMeshComponent* MeshBala;
 
 
 	/** Movimiento de proyectil */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = "true"))
-	UProjectileMovementComponent* MovimientoProyectil;
+		UProjectileMovementComponent* MovimientoProyectil;
 
 	FORCEINLINE UProjectileMovementComponent* GetProjectileMovement() const { return MovimientoProyectil; }
 
 	/** Function to handle the projectile hitting something */
 	UFUNCTION()
-	void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
 
 	/** Returns ProjectileMesh subobject **/
 	FORCEINLINE UStaticMeshComponent* GetProjectileMesh() const { return MeshBala; }
 
 
-	class AZombie* Zombie;
-
+	class AZombie* Zombie1;
+	class AZombie_con_V* Zombie;
 };

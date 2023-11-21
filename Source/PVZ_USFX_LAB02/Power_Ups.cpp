@@ -6,7 +6,7 @@
 // Sets default values
 APower_Ups::APower_Ups()
 {
- 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
+	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	MeshPower_Up = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh del Power up"));
@@ -15,16 +15,18 @@ APower_Ups::APower_Ups()
 
 	MeshPower_Up->SetStaticMesh(MeshPower_UpAsset.Object);
 
-	MeshPower_Up->SetRelativeScale3D(FVector(1.f, 1.f, 1.f));
+	MeshPower_Up->SetRelativeScale3D(FVector(0.2f, 0.2f, 0.2f));
 
 
 }
+
+
 
 // Called when the game starts or when spawned
 void APower_Ups::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 // Called every frame
@@ -34,3 +36,7 @@ void APower_Ups::Tick(float DeltaTime)
 
 }
 
+bool APower_Ups::IsActorDestroyed() const
+{
+	return IsPendingKill();
+}

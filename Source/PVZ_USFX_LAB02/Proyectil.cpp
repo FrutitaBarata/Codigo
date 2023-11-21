@@ -10,6 +10,7 @@
 
 #include "Plant.h"
 #include "Zombie.h"
+#include "Zombie_con_V.h"
 
 // Sets default values
 AProyectil::AProyectil()
@@ -62,7 +63,7 @@ void AProyectil::Tick(float DeltaTime)
 void AProyectil::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit)
 {
 
-	Zombie = Cast<AZombie>(OtherActor);
+	Zombie = Cast<AZombie_con_V>(OtherActor);
 
 	if (OtherActor == Zombie) {
 		Zombie->energia -= 10;

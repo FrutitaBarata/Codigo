@@ -46,12 +46,12 @@ protected:
 
 	/** Offset from the ships location to spawn projectiles */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
-	FVector GunOffset;
+		FVector GunOffset;
 	/* How fast the weapon will fire */
 	UPROPERTY(Category = Gameplay, EditAnywhere, BlueprintReadWrite)
-	float FireRate;
+		float FireRate;
 
-	
+
 
 	void ShotTimerExpired();
 
@@ -67,7 +67,7 @@ protected:
 private:
 	//The Clock Tower of this Subscriber
 	UPROPERTY()
-	ANotificarPlantas* Notificador;
+		ANotificarPlantas* Notificador;
 
 	//Called when this Subscriber is destroyed, it will unsubscribe this from the Clock Tower
 	virtual void Destroyed() override;
