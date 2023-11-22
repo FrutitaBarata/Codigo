@@ -59,7 +59,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	//-------------------------------------------------------------------------------
 
 	Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
-	Decorador_V = GetWorld()->SpawnActor<ADecorador_V>(ADecorador_V::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
+	//Decorador_V = GetWorld()->SpawnActor<ADecorador_V>(ADecorador_V::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 
 	
 	FVector SpawnLocationZombie = FVector(-820.0f, 600.0f, 22.0f);
@@ -116,7 +116,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 	SpawnLocationPlantTemp = SpawnLocationPlant;
 
 	// Genera 5 plantas
-	for (int i = 1; i <= 1; i++)
+	for (int i = 1; i <= 2; i++)
 	{
 		SpawnLocationPlantTemp.X += 100;
 
