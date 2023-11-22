@@ -10,6 +10,7 @@
  *
  */
 class APower_Ups;
+class AEstrategia_proyectil_base;
 class AZombie;
 class AZombieComun;
 class IZombie_Interface;
@@ -106,5 +107,8 @@ public:
 
 	ANotificarPlantas* Notificador;
 	float RangoAtaque;
+
+	AEstrategia_proyectil_base* proyectil_1;
+
 };
 

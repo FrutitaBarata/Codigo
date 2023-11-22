@@ -6,7 +6,7 @@
 #include "GameFramework/Actor.h"
 #include "Estrategias_Interface.h"
 #include "Estrategia_proyectil_base.generated.h"
-
+class AZombie_con_V;
 UCLASS()
 class PVZ_USFX_LAB02_API AEstrategia_proyectil_base : public AActor, public IEstrategias_Interface
 {
@@ -24,4 +24,6 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+
+	virtual void Daño(/*AZombie_con_V* _Actual*/) override;
 };

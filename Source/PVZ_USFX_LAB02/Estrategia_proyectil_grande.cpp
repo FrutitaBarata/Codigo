@@ -2,7 +2,7 @@
 
 
 #include "Estrategia_proyectil_grande.h"
-
+#include "Zombie_con_V.h"
 // Sets default values
 AEstrategia_proyectil_grande::AEstrategia_proyectil_grande()
 {
@@ -23,5 +23,9 @@ void AEstrategia_proyectil_grande::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AEstrategia_proyectil_grande::Daño(/*AZombie_con_V* _Actual*/)
+{
 }
 

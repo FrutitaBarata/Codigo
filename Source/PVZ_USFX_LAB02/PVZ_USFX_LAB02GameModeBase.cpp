@@ -25,7 +25,7 @@
 #include "Zombie_Interface.h"
 #include "NotificarPlantas.h"
 #include "AZombieMallaCambiable.h"
-
+#include "Estrategia_proyectil_base.h"
 
 APVZ_USFX_LAB02GameModeBase::APVZ_USFX_LAB02GameModeBase()
 {
@@ -57,7 +57,7 @@ void APVZ_USFX_LAB02GameModeBase::BeginPlay()
 {
 	Super::BeginPlay();
 	//-------------------------------------------------------------------------------
-
+	proyectil_1 = GetWorld()->SpawnActor<AEstrategia_proyectil_base>(AEstrategia_proyectil_base::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 	Notificador = GetWorld()->SpawnActor<ANotificarPlantas>(ANotificarPlantas::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 	//Decorador_V = GetWorld()->SpawnActor<ADecorador_V>(ADecorador_V::StaticClass(), FVector(0, 0, 0), FRotator::ZeroRotator);
 

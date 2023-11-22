@@ -7,7 +7,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Engine/StaticMesh.h"
-
+#include "Estrategias_Interface.h"
 #include "Plant.h"
 #include "Zombie.h"
 #include "Zombie_con_V.h"
@@ -73,14 +73,7 @@ void AProyectil::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimit
 		};
 	}
 
-	//APlant* Plant = Cast<APlant>(OtherActor);
-	//if (OtherActor->ActorHasTag("Plant")) {
-	//	Plant->energia -= 10;
-	//	GEngine->AddOnScreenDebugMessage(-1, 15.f, FColor::Yellow, FString::Printf(TEXT("Este es un mensaje %i"), Plant->energia));
-	//	if (Plant->energia <= 0) {
-	//		Plant->Destroy();
-	//	};
-	//}
+	
 
 
 	Destroy();
@@ -88,4 +81,7 @@ void AProyectil::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimit
 
 }
 
-
+void AProyectil::setEstrategia(AActor* _estrategia)
+{
+	estrategia1 = Cast<IEstrategias_Interface>(_estrategia);
+}
